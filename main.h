@@ -11,7 +11,6 @@
 *
 * Cette structure associe un spécificateur de format à une fonction.
 */
-
 typedef struct PrintType
 {
 	char *type;
