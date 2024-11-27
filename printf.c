@@ -1,4 +1,5 @@
 #include "main.h"
+#include "print_percent.c"
 #include <stdarg.h>
 #include <unistd.h>
 
@@ -31,21 +32,54 @@ int print_string(va_list args)
 }
 
 /**
-* print_percent - Prints a percent symbol
-* @args: va_list (unused)
+* print_integer - Prints an integer
+* @args: va_list containing the integer
 * Return: Number of characters printed
 */
-int print_percent(va_list args)
+int print_integer(va_list args)
 {
-	(void)args;
-	return (_putchar('%'));
+	int n = va_arg(args, int);
+
+	unsigned int num;
+
+	int count = 0;
+
+	if (n < 0)
+	{
+		count += _putchar('-');
+		num = -n;
+	}
+	else
+	{
+		num = n;
+	}
+
+	count += print_number(num);
+
+	return (count);
 }
 
 /**
-* _printf - prints formatted output
-* @format: format string
-*
-* Return: number of characters printed
+* print_number - Prints an unsigned integer recursively
+* @num: The unsigned integer to print
+* Return: Number of characters printed
+*/
+int print_number(unsigned int num)
+{
+	int count = 0;
+
+	if (num / 10)
+		count += print_number(num / 10);
+
+	count += _putchar((num % 10) + '0');
+
+	return (count);
+}
+
+/**
+* _printf - Prints formatted output
+* @format: Format string
+* Return: Number of characters printed
 */
 int _printf(const char *format, ...)
 {
@@ -53,6 +87,8 @@ int _printf(const char *format, ...)
 		{"c", print_char},
 		{"s", print_string},
 		{"%", print_percent},
+		{"d", print_integer},
+		{"i", print_integer},
 		{NULL, NULL}
 	};
 	va_list args;

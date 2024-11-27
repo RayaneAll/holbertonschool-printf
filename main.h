@@ -8,8 +8,6 @@
 * struct PrintType - A structure to print a specific type
 * @type: The type
 * @print_type_function: Function pointer to print the type
-*
-* Cette structure associe un spécificateur de format à une fonction.
 */
 typedef struct PrintType
 {
@@ -25,5 +23,7 @@ int _putchar(char character);
 int print_char(va_list arguments);
 int print_string(va_list arguments);
 int print_percent(va_list arguments);
+int print_integer(va_list arguments);
+int print_number(unsigned int num);
 
 #endif
