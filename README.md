@@ -37,24 +37,8 @@ format: A string that contains the text to be written to stdout. It can optional
 ...: Additional arguments replacing the format specifiers in the format string.
 Return Value
 The function returns the total number of characters printed (excluding the null byte used to end output to strings). If an output error is encountered, a negative value is returned.
-Compilation
-To compile the project, use:
-text
-gcc -Wall -Werror -Wextra -pedantic *.c -o printf
-
-Examples
-c
-#include "main.h"
-
-int main(void)
-{
-    _printf("Character: %c\n", 'H');
-    _printf("String: %s\n", "Hello, World!");
-    _printf("Integer: %d\n", 42);
-    _printf("Percent sign: %%\n");
-    return (0);
-}
-
+## Exemples and Testing 
+![Testing and Exemple](capture_d___e__cran_2024-11-28_a___11.16.35.png)
 Authors
 [Rayane Allaoui and Ardonit Musliu]
 License
