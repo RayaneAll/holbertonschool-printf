@@ -1,63 +1,46 @@
 #include "main.h"
 #include <stdarg.h>
+#include <unistd.h>
+
+int print_char(char c);
+int print_string(char *s);
+int print_number(int n);
 
 /**
- * _printf - Prints formatted output
- * @format: The format string containing characters and format specifiers
- *
- * Return: The total number of characters printed
- *
- * Description: Mimics the functionality of the standard `printf` function.
- * It supports the following format specifiers:
- * - %c: Prints a single character
- * - %s: Prints a string
- * - %d: Prints a decimal integer
- * - %i: Prints an integer
- * - %%: Prints a percent symbol
+ * _printf - Produces output according to a format
+ * @format: Character string containing zero or more directives
+ * Return: Number of characters printed (excluding null byte)
  */
 int _printf(const char *format, ...)
 {
-	PrintType_t print_types[] = {
-		{"c", print_char},
-		{"s", print_string},
-		{"%", print_percent},
-		{"d", print_integer},
-		{"i", print_integer},
-		{NULL, NULL}
-	};
 	va_list args;
-	int j, count = 0;
-
-	if (!format)
-		return (-1);
+	int count = 0;
+	char c;
+	char *s;
+	int n;
 
 	va_start(args, format);
-
-	while (*format)
+	while (format && *format)
 	{
-		if (*format == '%')
-		{
-			format++;
-			for (j = 0; print_types[j].type; j++)
-			{
-				if (*format == *(print_types[j].type))
-				{
-					count += print_types[j].print_type_function(args);
-					break;
-				}
-			}
-			if (!print_types[j].type)
-				count += _putchar('%') + _putchar(*format);
-		}
+		if (*format != '%')
+			count += write(1, format, 1);
 		else
 		{
-			count += _putchar(*format);
+			format++;
+			if (*format == 'c')
+				count += print_char(va_arg(args, int));
+			else if (*format == 's')
+				count += print_string(va_arg(args, char *));
+			else if (*format == '%')
+				count += write(1, "%", 1);
+			else if (*format == 'd' || *format == 'i')
+			{
+				n = va_arg(args, int);
+				count += print_number(n);
+			}
 		}
 		format++;
 	}
-
 	va_end(args);
-
 	return (count);
 }
-
