@@ -42,7 +42,7 @@ The function returns the total number of characters printed (excluding the null 
 ## Flowcharts
 ![Flowcharts](image-1.png)
 
-Authors
+## Authors
 [Rayane Allaoui and Ardonit Musliu]
 License
 This project is open source and available under the MIT License.
