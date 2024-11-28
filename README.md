@@ -39,9 +39,10 @@ Return Value
 The function returns the total number of characters printed (excluding the null byte used to end output to strings). If an output error is encountered, a negative value is returned.
 ## Exemples and Testing 
 ![Testing and Exemple](capture_d___e__cran_2024-11-28_a___11.16.35.png)
+## Flowcharts
+![Flowcharts](image-1.png)
+
 Authors
 [Rayane Allaoui and Ardonit Musliu]
 License
 This project is open source and available under the MIT License.
-
-![Flowcharts](image-1.png)
