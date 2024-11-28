@@ -1,54 +1,63 @@
 #include "main.h"
 #include <stdarg.h>
-#include <unistd.h>
 
 /**
- * _printf - Produces output according to a format
- * @format: Character string containing zero or more directives
- * Return: Number of characters printed (excluding null byte)
+ * _printf - Prints formatted output
+ * @format: The format string containing characters and format specifiers
+ *
+ * Return: The total number of characters printed
+ *
+ * Description: Mimics the functionality of the standard `printf` function.
+ * It supports the following format specifiers:
+ * - %c: Prints a single character
+ * - %s: Prints a string
+ * - %d: Prints a decimal integer
+ * - %i: Prints an integer
+ * - %%: Prints a percent symbol
  */
 int _printf(const char *format, ...)
 {
-
+	PrintType_t print_types[] = {
+		{"c", print_char},
+		{"s", print_string},
+		{"%", print_percent},
+		{"d", print_integer},
+		{"i", print_integer},
+		{NULL, NULL}
+	};
 	va_list args;
-	int count = 0;
-	char c, *s;
+	int j, count = 0;
+
+	if (!format)
+		return (-1);
 
 	va_start(args, format);
-	while (format && *format)
+
+	while (*format)
 	{
-		if (*format != '%')
+		if (*format == '%')
 		{
-			write(1, format, 1);
-			count++;
+			format++;
+			for (j = 0; print_types[j].type; j++)
+			{
+				if (*format == *(print_types[j].type))
+				{
+					count += print_types[j].print_type_function(args);
+					break;
+				}
+			}
+			if (!print_types[j].type)
+				count += _putchar('%') + _putchar(*format);
 		}
 		else
 		{
-			format++;
-			if (*format == 'c')
-			{
-				c = va_arg(args, int);
-				write(1, &c, 1);
-				count++;
-			}
-			else if (*format == 's')
-			{
-				s = va_arg(args, char *);
-				s = s ? s : "(null)";
-				while (*s)
-					count += write(1, s++, 1);
-			}
-			else if (*format == '%')
-				count += write(1, "%", 1);
-			else if (*format == 'd' || *format == 'i')
-				count += print_number(va_arg(args, int));
-			else
-				count += write(1, "%", 1) + write(1, format, 1);
+			count += _putchar(*format);
 		}
 		format++;
 	}
-	
+
 	va_end(args);
-	
+
 	return (count);
 }
+
