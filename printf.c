@@ -28,24 +28,20 @@ int _printf(const char *format, ...)
 	va_list args;
 	int j, count = 0;
 
-	/* Return -1 if format is NULL */
 	if (!format)
 		return (-1);
 
-	/* Initialize variadic argument list */
 	va_start(args, format);
 
-	/* Iterate through each character in the format string */
 	while (*format)
 	{
-		if (*format == '%') /* Handle format specifiers */
+		if (*format == '%')
 		{
 			format++;
 			for (j = 0; print_types[j].type; j++)
 			{
 				if (*format == *(print_types[j].type))
 				{
-					/* Call the function associated with the specifier */
 					count += print_types[j].print_type_function(args);
 					break;
 				}
@@ -55,15 +51,12 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			/* Print regular characters */
 			count += _putchar(*format);
 		}
 		format++;
 	}
 
-	/* Clean up variadic argument list */
 	va_end(args);
 
-	/* Return total number of characters printed */
 	return (count);
 }
