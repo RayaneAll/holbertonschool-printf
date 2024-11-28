@@ -14,6 +14,9 @@ The `_printf` function supports the following format specifiers:
 - `%i`: Prints an integer
 - `%%`: Prints a percent symbol
 
+## Man page
+The commande for execute man page : man./man_3_printf
+
 ## Usage
 
 To use the `_printf` function in your C program:
