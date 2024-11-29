@@ -5,12 +5,12 @@
 #include <stdarg.h>
 
 /**
- * struct PrintType - Associates a format specifier with a print function
- * @type: The format specifier (e.g., "c", "s", "%", etc.)
- * @print_type_function: Pointer to the function that handles the specifier
+ * struct PrintType - Structure to map format specifiers to functions
+ * @type: The format specifier
+ * @print_type_function: Pointer to the corresponding function
  *
- * Description: This structure is used to map each format specifier to its
- * corresponding function for handling variadic arguments in `_printf`.
+ * Description: This structure pairs each format specifier with its handler
+ * function to process variadic arguments for `_printf`.
  */
 typedef struct PrintType
 {

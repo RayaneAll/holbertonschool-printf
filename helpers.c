@@ -4,12 +4,12 @@
 
 /**
  * print_char - Prints a single character
- * @args: va_list containing the character
+ * @args: List of variadic arguments containing the character
  *
- * Return: The number of characters printed (always 1)
+ * Description: Extracts a character from the variadic argument list and
+ * prints it using `_putchar`.
  *
- * Description: Retrieves a character from the variadic argument list
- * and prints it using `_putchar`.
+ * Return: 1 on success
  */
 int print_char(va_list args)
 {
@@ -18,12 +18,13 @@ int print_char(va_list args)
 
 /**
  * print_string - Prints a string
- * @args: va_list containing the string
+ * @args: List of variadic arguments containing the string
  *
- * Return: The number of characters printed
+ * Description: Extracts a string from the variadic argument list and prints
+ * each character in the string using `_putchar`. If the string is NULL, it
+ * prints "(null)".
  *
- * Description: Prints each character in the string retrieved from
- * the variadic argument list. If the string is NULL, "(null)" is printed.
+ * Return: Number of characters printed
  */
 int print_string(va_list args)
 {
@@ -41,12 +42,12 @@ int print_string(va_list args)
 
 /**
  * print_percent - Prints a percent symbol
- * @args: va_list (unused)
+ * @args: List of variadic arguments (unused)
  *
- * Return: The number of characters printed (always 1)
+ * Description: Prints a '%' character. The `args` parameter is ignored since
+ * no argument is needed for this specifier.
  *
- * Description: Prints a single '%' character. The `args` parameter is
- * unused since no arguments are required for this operation.
+ * Return: 1 on success
  */
 int print_percent(va_list args)
 {
@@ -56,12 +57,12 @@ int print_percent(va_list args)
 
 /**
  * print_integer - Prints an integer
- * @args: va_list containing the integer
+ * @args: List of variadic arguments containing the integer
  *
- * Return: The number of characters printed
+ * Description: Extracts an integer from the variadic argument list and prints
+ * it using `_putchar`. Handles both positive and negative integers.
  *
- * Description: Retrieves an integer from the variadic argument list
- * and prints it using `_putchar`. Negative numbers are handled correctly.
+ * Return: Number of characters printed
  */
 int print_integer(va_list args)
 {
@@ -84,13 +85,13 @@ int print_integer(va_list args)
 }
 
 /**
- * print_number - Prints an unsigned integer recursively
+ * print_number - Prints an unsigned integer
  * @num: The unsigned integer to print
  *
- * Return: The number of characters printed
+ * Description: Recursively breaks down the integer into its digits and prints
+ * each digit using `_putchar`.
  *
- * Description: Recursively breaks down the integer into its digits,
- * printing each digit using `_putchar`.
+ * Return: Number of characters printed
  */
 int print_number(unsigned int num)
 {
