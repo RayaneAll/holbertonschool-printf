@@ -2,13 +2,12 @@
 #include <stdarg.h>
 
 /**
- * _printf - Produces output according to a format
- * @format: Character string containing zero or more directives
+ * _printf - Prints formatted output
+ * @format: The format string containing characters and specifiers
  *
  * Description: Mimics the standard `printf` function. Processes the format
  * string to handle specifiers for characters (%c), strings (%s), integers
- * (%d, %i), and percent signs (%%). If `%` is followed by `\0`, it does not
- * print anything.
+ * (%d, %i), and percent signs (%%).
  *
  * Return: Total number of characters printed
  */
@@ -25,20 +24,15 @@ int _printf(const char *format, ...)
 	va_list args;
 	int j, count = 0;
 
-	if (!format) /* Handle NULL format string */
+	if (!format)
 		return (-1);
 
 	va_start(args, format);
-
-	while (*format) /* Loop through each character in the format string */
+	while (*format)
 	{
-		if (*format == '%') /* Handle format specifier */
+		if (*format == '%')
 		{
 			format++;
-			if (*format == '\0') /* If '%' is followed by NULL, stop processing */
-				return (count); /* Do nothing, just return the count */
-
-			/* Check for valid specifier */
 			for (j = 0; print_types[j].type; j++)
 			{
 				if (*format == *(print_types[j].type))
@@ -47,17 +41,16 @@ int _printf(const char *format, ...)
 					break;
 				}
 			}
-
-			if (!print_types[j].type) /* If no valid specifier, print '%' and the character */
+			if (!print_types[j].type)
 				count += _putchar('%') + _putchar(*format);
 		}
-		else /* Print regular characters */
+		else
 		{
 			count += _putchar(*format);
 		}
-		format++; /* Move to the next character */
+		format++;
 	}
 
-	va_end(args); /* Clean up variadic arguments */
+	va_end(args);
 	return (count);
 }
